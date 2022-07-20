@@ -4,6 +4,7 @@
 div{
     background-color: #9667b9;
     text-align: center;
+    display: table-footer-group;
 }
 @media(min-width:576px){
  #fotodeperfil{
@@ -27,6 +28,8 @@ div{
 }
 #nombre{
     font-weight: bold;
-    margin-top: 30%;
+    margin-top: 10%;
+    
 }
+
 
