@@ -34,7 +34,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://frontendmsk-b53a8.web.app")
+/*@CrossOrigin(origins = "http://localhost:4200")*/
 public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -59,7 +60,7 @@ public class AuthController {
             return new ResponseEntity(new Mensaje("Ese email ya existe"), HttpStatus.BAD_REQUEST);
         
         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
-        nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
+            nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
         
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
@@ -69,26 +70,26 @@ public class AuthController {
         usuario.setRoles(roles);
         usuarioService.save(usuario);
         
-        return new ResponseEntity(new Mensaje("Usuario guardado"), HttpStatus.CREATED);
-        
+        return new ResponseEntity(new Mensaje("Usuario guardado"),HttpStatus.CREATED);
     }
+    
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-     if(bindingResult.hasErrors())
-      return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
-     
-     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-     loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
-     
-     SecurityContextHolder.getContext().setAuthentication(authentication);
-     
-     String jwt = jwtProvider.generateToken(authentication);
-     
-     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-     
-     JwtDto  jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-     
-     return new ResponseEntity(jwtDto, HttpStatus.OK);
-     
-    }  
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
+        
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+        loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+        
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        String jwt = jwtProvider.generateToken(authentication);
+        
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        
+        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        
+        return new ResponseEntity(jwtDto, HttpStatus.OK);
+    }
+    
 }
