@@ -10,8 +10,8 @@ import { NuevoUsuario } from '../model/nuevo-usuario';
 })
 export class AuthService {
 //  URL = environment.URL + 'auth/';
-    // URL = 'https://bkndprueba.herokuapp.com/auth/';
- URL = 'http://localhost:8080/auth/';
+    URL = 'https://bkndprueba.herokuapp.com/auth/';
+//  URL = 'http://localhost:8080/auth/';
 
   constructor(private httpClient: HttpClient) { }
 

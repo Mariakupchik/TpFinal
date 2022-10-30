@@ -8,8 +8,8 @@ import { Educacion } from '../model/educacion';
 })
 export class EducacionService {
   // URL = environment.URL + 'educacion/';
-  // URL = 'https://bkndprueba.herokuapp.com/educacion/';
-  URL = 'http://localhost:8080/educacion/';
+  URL = 'https://bkndprueba.herokuapp.com/educacion/';
+  // URL = 'http://localhost:8080/educacion/';
 
   constructor(private httpClient : HttpClient) { }
 

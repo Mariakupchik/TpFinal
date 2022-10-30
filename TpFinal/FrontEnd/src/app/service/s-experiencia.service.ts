@@ -8,8 +8,8 @@ import { Experiencia } from '../model/experiencia';
 })
 export class SExperienciaService {
   // URL = environment.URL + 'explab/';
-  // URL = 'https://bkndprueba.herokuapp.com/explab/';
-  URL = 'http://localhost:8080/explab/';
+  URL = 'https://bkndprueba.herokuapp.com/explab/';
+  // URL = 'http://localhost:8080/explab/';
 
   constructor(private httpClient: HttpClient) { }
 
